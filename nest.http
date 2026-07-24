@@ -1,0 +1,41 @@
+### Login:
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "example@mail.com",
+  "password": "password123"
+}
+
+### Logout:
+GET {{host}}/auth/logout
+Content-Type: application/json
+
+
+### GET:
+GET {{host}}/auth/user-info
+Content-Type: application/json
+
+
+
+### add:
+POST {{host}}/cats
+Content-Type: application/json
+
+{
+  "name": "Bageera",
+  "breed": "Serbian",
+  "age": 7
+}
+
+### get poduct by id:
+GET {{host}}/cats/1784729042506
+Content-Type: application/json
+
+### update product:
+PATCH {{host}}/cats/1784744179645
+Content-Type: application/json
+
+{
+  "name": ""
+}
