@@ -12,30 +12,31 @@ GET {{host}}/auth/logout
 Content-Type: application/json
 
 
-### GET:
+### GET user-info:
 GET {{host}}/auth/user-info
 Content-Type: application/json
 
+### findProducts:
+GET {{host}}/products
+Content-Type: application/json
 
-
-### add:
-POST {{host}}/cats
+### createProduct:
+POST {{host}}/products
 Content-Type: application/json
 
 {
-  "name": "Bageera",
-  "breed": "Serbian",
-  "age": 7
+  "name": "Ibuprofen",
+  "photo": "https://i.ibb.co/bLKP624/5-15-1000x1000-min.jpg",
+  "supplierId": 24,
+  "stock": 25,
+  "price": 45.99,
+  "category": "Medicine"
 }
 
-### get poduct by id:
-GET {{host}}/cats/1784729042506
-Content-Type: application/json
-
-### update product:
-PATCH {{host}}/cats/1784744179645
+### updateProduct:
+PATCH {{host}}/products/64
 Content-Type: application/json
 
 {
-  "name": ""
+  "name": "Bepanten"
 }

@@ -33,6 +33,7 @@ async function main() {
   }));
   await prisma.supplier.createMany({
     data: dataSuppliers,
+    skipDuplicates: true,
   });
   const savedSuppliers = await prisma.supplier.findMany();
 
@@ -51,6 +52,7 @@ async function main() {
   });
   await prisma.product.createMany({
     data: dataProducts,
+    skipDuplicates: true,
   });
 }
 main()
