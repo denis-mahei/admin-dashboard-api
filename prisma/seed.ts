@@ -66,7 +66,7 @@ async function main() {
     spent: parseFloat(customer.spent.replace(/,/g, '')),
     phone: customer.phone,
     address: customer.address,
-    register_date: customer.register_date,
+    register_date: new Date(customer.register_date),
   }));
 
   await prisma.customer.createMany({
@@ -77,6 +77,7 @@ async function main() {
   const dataOrders = orders.map((order: any) => ({
     ...order,
     products: parseInt(order.products),
+    order_date: new Date(order.order_date),
   }));
   await prisma.order.createMany({
     data: dataOrders,

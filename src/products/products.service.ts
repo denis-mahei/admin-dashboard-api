@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { Product } from '../../generated/prisma/client';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/updateProduct.dto';
+import { ProductParams } from './interface/product-params';
 
 @Injectable()
 export class ProductsService {
@@ -15,14 +16,7 @@ export class ProductsService {
     limit = 10,
     sortBy = 'name',
     order = 'asc',
-  }: {
-    name: string;
-    category: string;
-    sortBy: string;
-    order: string;
-    limit: number;
-    page: number;
-  }): Promise<Product[]> {
+  }: ProductParams): Promise<Product[]> {
     return this.prisma.product.findMany({
       where: {
         category,

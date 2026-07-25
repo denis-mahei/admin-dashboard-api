@@ -23,7 +23,7 @@ GET {{host}}/products
 Content-Type: application/json
 
 ### find products by query:
-GET {{host}}/products?name=Aspirin
+GET {{host}}/products?page=1
 
 ### create product:
 POST {{host}}/products
@@ -76,3 +76,7 @@ Content-Type: application/json
 {
   "name": "John Doe"
 }
+
+### get orders with query:
+GET {{host}}/orders?order=desc
+Content-Type: application/json

@@ -14,6 +14,7 @@ import { ProductsService } from './products.service';
 import { JwtAuthGuard } from '../auth/jwt-auth/jwt-auth.guard';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/updateProduct.dto';
+import { ProductParamsDto } from './dto/product-params.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -21,7 +22,7 @@ export class ProductsController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async findProducts(@Query() params) {
+  async findProducts(@Query() params: ProductParamsDto) {
     return this.products.findAll(params);
   }
 

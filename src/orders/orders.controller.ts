@@ -1,6 +1,7 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { JwtAuthGuard } from '../auth/jwt-auth/jwt-auth.guard';
+import { OrderParamsDto } from './dto/order-params.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -8,7 +9,7 @@ export class OrdersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async findAll() {
-    return this.orders.getOrders;
+  async getProducts(@Query() params: OrderParamsDto) {
+    return this.orders.findAll(params);
   }
 }

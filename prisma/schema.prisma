@@ -54,12 +54,12 @@ model Customer {
 }
 
 model Order {
-  id         Int     @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   photo      String
   name       String
   address    String
   products   Int
   price      Decimal
   status     String
-  order_date String
+  order_date DateTime
 }
