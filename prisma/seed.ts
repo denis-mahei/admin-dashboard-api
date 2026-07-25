@@ -5,6 +5,7 @@ import { PrismaNeon } from '@prisma/adapter-neon';
 import suppliers from './data/suppliers.json';
 import products from './data/products.json';
 import customers from './data/customers.json';
+import orders from './data/orders.json';
 
 const adapter = new PrismaNeon({
   connectionString: process.env.DATABASE_URL,
@@ -14,6 +15,8 @@ const prisma = new PrismaClient({ adapter });
 const secret = bcrypt.hash('password123', 10);
 
 async function main() {
+  await prisma.order.deleteMany();
+  await prisma.customer.deleteMany();
   await prisma.product.deleteMany();
   await prisma.supplier.deleteMany();
   await prisma.user.deleteMany();
@@ -56,10 +59,27 @@ async function main() {
     skipDuplicates: true,
   });
 
-  const dataCustomers = customers.map((customer: any) => ({ ...customer, spent: parseFloat(customer.spent.replace(/,/g, '')) });
+  const dataCustomers = customers.map((customer: any) => ({
+    photo: customer.photo || customer.image || '',
+    name: customer.name,
+    email: customer.email,
+    spent: parseFloat(customer.spent.replace(/,/g, '')),
+    phone: customer.phone,
+    address: customer.address,
+    register_date: customer.register_date,
+  }));
 
   await prisma.customer.createMany({
     data: dataCustomers,
+    skipDuplicates: true,
+  });
+
+  const dataOrders = orders.map((order: any) => ({
+    ...order,
+    products: parseInt(order.products),
+  }));
+  await prisma.order.createMany({
+    data: dataOrders,
     skipDuplicates: true,
   });
 }
