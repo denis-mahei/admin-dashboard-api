@@ -41,3 +41,25 @@ model Product {
   supplierId Int
   category   String
 }
+
+model Customer {
+  id            Int      @id @default(autoincrement())
+  photo         String
+  name          String
+  email         String
+  spent         Decimal
+  phone         String
+  address       String
+  register_date DateTime
+}
+
+model Order {
+  id         Int     @id @default(autoincrement())
+  photo      String
+  name       String
+  address    String
+  products   Int
+  price      Decimal
+  status     String
+  order_date String
+}

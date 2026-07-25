@@ -16,16 +16,16 @@ Content-Type: application/json
 GET {{host}}/auth/user-info
 Content-Type: application/json
 
-### deleteProduct:
-DELETE {{host}}/products/94
-Content-Type: application/json
 
 
-### findProducts:
+### find products:
 GET {{host}}/products
 Content-Type: application/json
 
-### createProduct:
+### find products by query:
+GET {{host}}/products?name=Aspirin
+
+### create product:
 POST {{host}}/products
 Content-Type: application/json
 
@@ -38,10 +38,41 @@ Content-Type: application/json
   "category": "Medicine"
 }
 
-### updateProduct:
+
+### delete by id product:
+DELETE {{host}}/products/94
+Content-Type: application/json
+
+
+### update product:
 PATCH {{host}}/products/64
 Content-Type: application/json
 
 {
   "name": "Bepanten"
+}
+
+### get suppliers:
+GET {{host}}/suppliers
+Content-Type: application/json
+
+### add new supplier:
+POST {{host}}/suppliers
+Content-Type: application/json
+
+{
+  "name": "John Smith",
+  "address": "Dhaka-12",
+  "company": "MedPharm",
+  "date": "2024-03-15T00:00:00.000Z",
+  "amount": 4500.50,
+  "status": "Active"
+}
+
+### update supplier:
+PATCH {{host}}/suppliers/31
+Content-Type: application/json
+
+{
+  "name": "John Doe"
 }
