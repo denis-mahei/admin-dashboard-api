@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import suppliers from './data/suppliers.json';
 import products from './data/products.json';
+import customers from './data/customers.json';
 
 const adapter = new PrismaNeon({
   connectionString: process.env.DATABASE_URL,
@@ -28,7 +29,7 @@ async function main() {
     address: supplier.address,
     company: supplier.suppliers,
     date: new Date(supplier.date),
-    amount: parseFloat(supplier.amount.replace(/[^0-9.]/g, '')),
+    amount: parseFloat(supplier.amount.replace(/[^0-9.]/g, '')).toFixed(2),
     status: supplier.status,
   }));
   await prisma.supplier.createMany({
@@ -52,6 +53,13 @@ async function main() {
   });
   await prisma.product.createMany({
     data: dataProducts,
+    skipDuplicates: true,
+  });
+
+  const dataCustomers = customers.map((customer: any) => ({ ...customer, spent: parseFloat(customer.spent.replace(/,/g, '')) });
+
+  await prisma.customer.createMany({
+    data: dataCustomers,
     skipDuplicates: true,
   });
 }
