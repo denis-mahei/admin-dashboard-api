@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -37,5 +38,11 @@ export class ProductsController {
     @Body() updateProductDto: UpdateProductDto,
   ) {
     return this.products.updateProduct(id, updateProductDto);
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  async deleteProduct(@Param('id', ParseIntPipe) id: number) {
+    return this.products.deleteProduct(id);
   }
 }

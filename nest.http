@@ -16,6 +16,11 @@ Content-Type: application/json
 GET {{host}}/auth/user-info
 Content-Type: application/json
 
+### deleteProduct:
+DELETE {{host}}/products/94
+Content-Type: application/json
+
+
 ### findProducts:
 GET {{host}}/products
 Content-Type: application/json

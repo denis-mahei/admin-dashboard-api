@@ -47,4 +47,10 @@ export class ProductsService {
       data: updateProductDto,
     });
   }
+
+  async deleteProduct(id: number) {
+    return this.prisma.product.delete({
+      where: { id },
+    });
+  }
 }
