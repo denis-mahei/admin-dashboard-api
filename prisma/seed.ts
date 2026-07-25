@@ -6,6 +6,10 @@ import suppliers from './data/suppliers.json';
 import products from './data/products.json';
 import customers from './data/customers.json';
 import orders from './data/orders.json';
+import incomeExpenses from './data/Income-Expenses.json';
+import pharmacies from './data/pharmacies.json';
+import nearestPharmacies from './data/nearest_pharmacies.json';
+import reviews from './data/reviews.json';
 
 const adapter = new PrismaNeon({
   connectionString: process.env.DATABASE_URL,
@@ -15,11 +19,7 @@ const prisma = new PrismaClient({ adapter });
 const secret = bcrypt.hash('password123', 10);
 
 async function main() {
-  await prisma.order.deleteMany();
-  await prisma.customer.deleteMany();
-  await prisma.product.deleteMany();
-  await prisma.supplier.deleteMany();
-  await prisma.user.deleteMany();
+  //user
   const user = await prisma.user.create({
     data: {
       email: 'example@mail.com',
@@ -27,12 +27,13 @@ async function main() {
       password: (await secret).toString(),
     },
   });
+  //suppliers
   const dataSuppliers = suppliers.map((supplier: any) => ({
     name: supplier.name,
     address: supplier.address,
     company: supplier.suppliers,
     date: new Date(supplier.date),
-    amount: parseFloat(supplier.amount.replace(/[^0-9.]/g, '')).toFixed(2),
+    amount: parseFloat(supplier.amount.replace(/[^0-9.]/g, '')),
     status: supplier.status,
   }));
   await prisma.supplier.createMany({
@@ -40,7 +41,7 @@ async function main() {
     skipDuplicates: true,
   });
   const savedSuppliers = await prisma.supplier.findMany();
-
+  // products
   const dataProducts = products.map((product: any) => {
     const supplier = savedSuppliers.find(
       (s) => s.company === product.suppliers,
@@ -58,7 +59,7 @@ async function main() {
     data: dataProducts,
     skipDuplicates: true,
   });
-
+  // customers
   const dataCustomers = customers.map((customer: any) => ({
     photo: customer.photo || customer.image || '',
     name: customer.name,
@@ -73,15 +74,38 @@ async function main() {
     data: dataCustomers,
     skipDuplicates: true,
   });
-
+  // orders
   const dataOrders = orders.map((order: any) => ({
     ...order,
-    products: parseInt(order.products),
+    products: parseFloat(order.products),
+    price: parseFloat(order.price),
     order_date: new Date(order.order_date),
   }));
   await prisma.order.createMany({
     data: dataOrders,
     skipDuplicates: true,
+  });
+
+  // incomeExpenses
+  const dataIncomeExpenses = incomeExpenses.map((i: any) => ({
+    ...i,
+    amount: parseFloat(i.amount),
+  }));
+  await prisma.incomeExpenses.createMany({
+    data: dataIncomeExpenses,
+    skipDuplicates: true,
+  });
+  //pharmacies
+  const allPharmacies = [...pharmacies, ...nearestPharmacies];
+  const dataPharmacies = allPharmacies.map((i: any) => i);
+  await prisma.pharmacy.createMany({
+    data: dataPharmacies,
+    skipDuplicates: true,
+  });
+  // reviews
+  const dataReviews = reviews.map((i: any) => i);
+  await prisma.review.createMany({
+    data: dataReviews,
   });
 }
 main()

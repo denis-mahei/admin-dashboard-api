@@ -26,7 +26,7 @@ model Supplier {
   address  String
   company  String
   date     DateTime
-  amount   Decimal
+  amount   Float
   status   String
   products Product[]
 }
@@ -37,7 +37,7 @@ model Product {
   name       String
   supplier   Supplier @relation(fields: [supplierId], references: [id])
   stock      Int
-  price      Decimal
+  price      Float
   supplierId Int
   category   String
 }
@@ -47,7 +47,7 @@ model Customer {
   photo         String
   name          String
   email         String
-  spent         Decimal
+  spent         Float
   phone         String
   address       String
   register_date DateTime
@@ -59,7 +59,29 @@ model Order {
   name       String
   address    String
   products   Int
-  price      Decimal
+  price      Float
   status     String
   order_date DateTime
+}
+
+model IncomeExpenses {
+  id     Int    @id @default(autoincrement())
+  name   String
+  amount Float
+  type   String
+}
+
+model Pharmacy {
+  id      Int    @id @default(autoincrement())
+  name    String
+  address String
+  city    String
+  phone   String
+  rating  Int
+}
+
+model Review {
+  id          Int    @id @default(autoincrement())
+  name        String
+  testimonial String
 }
