@@ -3,8 +3,8 @@ POST {{host}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "example@mail.com",
-  "password": "password123"
+  "email": "vendor@gmail.com",
+  "password": "password1234"
 }
 
 ### Logout:
@@ -69,11 +69,11 @@ Content-Type: application/json
 }
 
 ### update supplier:
-PATCH {{host}}/suppliers/31
+PATCH {{host}}/suppliers/9
 Content-Type: application/json
 
 {
-  "name": "John Doe"
+  "name": "John Wick"
 }
 
 ### get orders with query:
