@@ -17,7 +17,6 @@ GET {{host}}/auth/user-info
 Content-Type: application/json
 
 
-
 ### find products:
 GET {{host}}/products
 Content-Type: application/json
@@ -83,4 +82,8 @@ Content-Type: application/json
 
 ### get all customers:
 GET {{host}}/customers
+Content-Type: application/json
+
+### dashboard data:
+GET {{host}}/dashboard
 Content-Type: application/json

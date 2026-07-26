@@ -8,4 +8,7 @@ export class CustomersService {
   async findAll() {
     return this.prisma.customer.findMany();
   }
+  async findOne(id: number) {
+    return this.prisma.customer.findUnique({ where: { id } });
+  }
 }
