@@ -9,11 +9,11 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signIn.dto';
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
 import { JwtAuthGuard } from './jwt-auth/jwt-auth.guard';
 import { SignUpDto } from './dto/signUp.dto';
 import { COOKIE_OPTIONS } from '../common/constants';
-import type { Request } from 'express';
+import { ApiResponse } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
@@ -27,6 +27,35 @@ export class AuthController {
   }
 
   @Post('register')
+  @ApiResponse({
+    status: 201,
+    description: 'User successfully registered',
+    schema: {
+      example: {
+        id: 2,
+        name: 'John Doe',
+        email: 'johndoe@email.com',
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Invalid input data',
+    schema: {
+      example: {
+        message: ['email must be an email', 'phone must be a string'],
+      },
+    },
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Conflict credentials',
+    schema: {
+      example: {
+        message: 'Email already exists',
+      },
+    },
+  })
   async register(
     @Body() signUpDto: SignUpDto,
     @Res({ passthrough: true }) res: Response,

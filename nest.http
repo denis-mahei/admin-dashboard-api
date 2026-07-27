@@ -3,10 +3,10 @@ POST {{host}}/auth/register
 Content-Type: application/json
 
 {
-  "email": "johndoe@email.com",
+  "email": "johndoeemail.com",
   "password": "password1234",
   "name": "John Doe",
-  "phone": "+380731234567"
+  "phone": 123
 }
 
 ### login client:
