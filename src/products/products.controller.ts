@@ -21,7 +21,6 @@ export class ProductsController {
   constructor(private products: ProductsService) {}
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   async findProducts(@Query() params: ProductParamsDto) {
     return this.products.findAll(params);
   }

@@ -13,6 +13,7 @@ import type { Response } from 'express';
 import { JwtAuthGuard } from './jwt-auth/jwt-auth.guard';
 import { SignUpDto } from './dto/signUp.dto';
 import { COOKIE_OPTIONS } from '../common/constants';
+import type { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -20,7 +21,7 @@ export class AuthController {
 
   @Get('user-info')
   @UseGuards(JwtAuthGuard)
-  async getUserInfo(@Req() req) {
+  async getUserInfo(@Req() req: Request) {
     const id = req.user.sub;
     return this.authService.getUser(id);
   }
