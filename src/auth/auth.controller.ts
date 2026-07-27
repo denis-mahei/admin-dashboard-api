@@ -11,6 +11,9 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signIn.dto';
 import type { Response } from 'express';
 import { JwtAuthGuard } from './jwt-auth/jwt-auth.guard';
+import { SignUpDto } from './dto/signUp.dto';
+import { COOKIE_OPTIONS } from '../common/constants';
+import type { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -18,9 +21,20 @@ export class AuthController {
 
   @Get('user-info')
   @UseGuards(JwtAuthGuard)
-  async getUserInfo(@Req() req) {
+  async getUserInfo(@Req() req: Request) {
     const id = req.user.sub;
     return this.authService.getUser(id);
+  }
+
+  @Post('register')
+  async register(
+    @Body() signUpDto: SignUpDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const result = await this.authService.signUp(signUpDto);
+    res.cookie('access_token', result.access_token, COOKIE_OPTIONS);
+
+    return result.user;
   }
 
   @Get('logout')
@@ -40,14 +54,8 @@ export class AuthController {
       signInDto.email,
       signInDto.password,
     );
-    const options = {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'lax',
-      path: '/',
-    } as const;
 
-    res.cookie('access_token', result.access_token, options);
+    res.cookie('access_token', result.access_token, COOKIE_OPTIONS);
 
     return result.user;
   }

@@ -1,3 +1,25 @@
+### register client:
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "johndoe@email.com",
+  "password": "password1234",
+  "name": "John Doe",
+  "phone": "+380731234567"
+}
+
+### login client:
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "johndoe@email.com",
+  "password": "password1234",
+  "name": "John Doe",
+  "phone": "+380731234567"
+}
+
 ### Login:
 POST {{host}}/auth/login
 Content-Type: application/json
@@ -87,3 +109,33 @@ Content-Type: application/json
 ### dashboard data:
 GET {{host}}/dashboard
 Content-Type: application/json
+
+### get stores:
+GET {{host}}/stores
+Content-Type: application/json
+
+### get nearest:
+GET {{host}}/stores/nearest
+Content-Type: application/json
+
+### get cart:
+GET {{host}}/cart
+Content-Type: application/json
+
+### add cart:
+POST {{host}}/cart
+Content-Type: application/json
+
+{
+  "productId": 255,
+  "quantity": 1
+}
+
+### update cart:
+PATCH {{host}}/cart/2
+Content-Type: application/json
+
+{
+  "quantity": 4,
+  "productId": 259
+}
