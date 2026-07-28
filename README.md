@@ -16,51 +16,58 @@ Backend REST API for an e-pharmacy admin dashboard built with NestJS, Prisma ORM
 
 ### Auth
 
-| Method | Endpoint         | Description              | Auth |
-|--------|------------------|--------------------------|------|
-| POST   | /auth/login      | Login, returns user info and sets httpOnly cookie | No   |
-| GET    | /auth/logout     | Clears auth cookie       | No   |
-| GET    | /auth/user-info  | Returns current user data | Yes  |
+| Method | Endpoint            | Description                                       | Auth |
+|--------|---------------------|---------------------------------------------------|------|
+| POST   | /api/auth/login     | Login, returns user info and sets httpOnly cookie | No   |
+| GET    | /api/auth/logout    | Clears auth cookie                                | No   |
+| GET    | /api/auth/user-info | Returns current user data                         | Yes  |
 
 ### Products
 
-| Method | Endpoint         | Description              | Auth |
-|--------|------------------|--------------------------|------|
-| GET    | /products        | List products with filtering, sorting, pagination | Yes  |
-| POST   | /products        | Create a new product     | Yes  |
-| PATCH  | /products/:id    | Update product by ID     | Yes  |
-| DELETE | /products/:id    | Delete product by ID     | Yes  |
+| Method | Endpoint          | Description                                       | Auth |
+|--------|-------------------|---------------------------------------------------|------|
+| GET    | /api/products     | List products with filtering, sorting, pagination | Yes  |
+| POST   | /api/products     | Create a new product                              | Yes  |
+| PATCH  | /api/products/:id | Update product by ID                              | Yes  |
+| DELETE | /api/products/:id | Delete product by ID                              | Yes  |
 
 **Query params:** `name`, `category`, `sortBy`, `order` (asc/desc), `page`, `limit`
 
 ### Suppliers
 
-| Method | Endpoint         | Description              | Auth |
-|--------|------------------|--------------------------|------|
-| GET    | /suppliers       | List all suppliers       | Yes  |
-| POST   | /suppliers       | Create a new supplier    | Yes  |
-| PATCH  | /suppliers/:id   | Update supplier by ID    | Yes  |
+| Method | Endpoint           | Description              | Auth |
+|--------|--------------------|--------------------------|------|
+| GET    | /api/suppliers     | List all suppliers       | Yes  |
+| POST   | /api/suppliers     | Create a new supplier    | Yes  |
+| PATCH  | /api/suppliers/:id | Update supplier by ID    | Yes  |
 
 ### Customers
 
-| Method | Endpoint          | Description              | Auth |
-|--------|-------------------|--------------------------|------|
-| GET    | /customers        | List all customers       | Yes  |
-| GET    | /customers/:id    | Customer details by ID   | Yes  |
+| Method | Endpoint           | Description              | Auth |
+|--------|--------------------|--------------------------|------|
+| GET    | /api/customers     | List all customers       | Yes  |
+| GET    | /api/customers/:id | Customer details by ID   | Yes  |
 
 ### Orders
 
-| Method | Endpoint         | Description              | Auth |
-|--------|------------------|--------------------------|------|
-| GET    | /orders          | List orders with filtering and sorting | Yes  |
+| Method | Endpoint    | Description                            | Auth |
+|--------|-------------|----------------------------------------|------|
+| GET    | /api/orders | List orders with filtering and sorting | Yes  |
 
 **Query params:** `name`, `status`, `sortBy`, `order` (asc/desc), `page`, `limit`
 
 ### Dashboard
 
-| Method | Endpoint         | Description              | Auth |
-|--------|------------------|--------------------------|------|
-| GET    | /dashboard       | Aggregated stats: product/supplier/customer counts, recent customers, income/expenses | Yes  |
+| Method | Endpoint       | Description                                                                           | Auth |
+|--------|----------------|---------------------------------------------------------------------------------------|------|
+| GET    | /api/dashboard | Aggregated stats: product/supplier/customer counts, recent customers, income/expenses | Yes  |
+
+### Stores
+
+| Method | Endpoint**          | Description                 | Auth |
+|--------|---------------------|-----------------------------|------|
+| GET    | /api/stores         | Get Stores List             | No   |
+| GET    | /api/stores/nearest | Get Nearest Medicine Stores | No   |
 
 ## Getting Started
 
@@ -104,6 +111,7 @@ src/
 ├── customers/      # Customers module
 ├── dashboard/      # Dashboard aggregation
 ├── orders/         # Orders module
+├── stores/         # Stores module
 ├── prisma/         # Prisma service and module
 ├── products/       # Products CRUD
 ├── suppliers/      # Suppliers CRUD
