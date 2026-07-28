@@ -81,6 +81,7 @@ model Pharmacy {
   city    String
   phone   String
   rating  Int
+  type    String @default("regular")
 }
 
 model Review {
