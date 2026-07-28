@@ -60,11 +60,11 @@ Backend REST API for an e-pharmacy admin dashboard built with NestJS, Prisma ORM
 
 | Method | Endpoint       | Description                                                                           | Auth |
 |--------|----------------|---------------------------------------------------------------------------------------|------|
-| GET    | /api/dashboard | Aggregated stats: product/supplier/customer counts, recent customers, income/expenses | Yes  |
+| GET    | /api/dashboard | Aggregated stats: product/supplier/customer counts, recent customers, income/expenses<br/> | Yes  |
 
 ### Stores
 
-| Method | Endpoint**          | Description                 | Auth |
+| Method | Endpoint            | Description                 | Auth |
 |--------|---------------------|-----------------------------|------|
 | GET    | /api/stores         | Get Stores List             | No   |
 | GET    | /api/stores/nearest | Get Nearest Medicine Stores | No   |
