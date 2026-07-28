@@ -19,7 +19,8 @@ const prisma = new PrismaClient({ adapter });
 const secret = bcrypt.hash('password123', 10);
 
 async function main() {
-  await prisma.product.deleteMany(); // залежить від Supplier
+  await prisma.cartItem.deleteMany();
+  await prisma.product.deleteMany();
   await prisma.order.deleteMany();
   await prisma.customer.deleteMany();
   await prisma.incomeExpenses.deleteMany();
@@ -103,10 +104,12 @@ async function main() {
     skipDuplicates: true,
   });
 
-  const allPharmacies = [...pharmacies, ...nearestPharmacies];
-  const dataPharmacies = allPharmacies.map((i: any) => i);
+  const dataPharmacies = pharmacies.map((p) => ({ ...p, type: 'regular' }));
+  const dataNearest = nearestPharmacies.map((p) => ({ ...p, type: 'nearest' }));
+
+  const all = [...dataPharmacies, ...dataNearest];
   await prisma.pharmacy.createMany({
-    data: dataPharmacies,
+    data: all,
     skipDuplicates: true,
   });
 

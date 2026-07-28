@@ -7,7 +7,7 @@ export class StoresController {
 
   @Get()
   async getAll() {
-    return this.stores.findAll();
+    return this.stores.findStores();
   }
 
   @Get('nearest')

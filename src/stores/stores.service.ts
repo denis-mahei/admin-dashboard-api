@@ -5,14 +5,15 @@ import { PrismaService } from '../prisma/prisma.service';
 export class StoresService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll() {
-    return this.prisma.pharmacy.findMany();
+  async findStores() {
+    return this.prisma.pharmacy.findMany({
+      where: { type: 'regular' },
+    });
   }
 
   async findNearest() {
     return this.prisma.pharmacy.findMany({
-      orderBy: { rating: 'desc' },
-      take: 6,
+      where: { type: 'nearest' },
     });
   }
 }
