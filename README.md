@@ -58,9 +58,9 @@ Backend REST API for an e-pharmacy admin dashboard built with NestJS, Prisma ORM
 
 ### Dashboard
 
-| Method | Endpoint       | Description                                                                           | Auth |
-|--------|----------------|---------------------------------------------------------------------------------------|------|
-| GET    | /api/dashboard | Aggregated stats: product/supplier/customer counts, recent customers, income/expenses<br/> | Yes  |
+| Method | Endpoint       | Description                                                                            | Auth |
+|--------|----------------|----------------------------------------------------------------------------------------|------|
+| GET    | /api/dashboard | Aggregated stats: product/supplier/customer counts, recent customers, income/expenses  | Yes  |
 
 ### Stores
 

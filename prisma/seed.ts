@@ -34,6 +34,7 @@ async function main() {
       email: 'vendor@gmail.com',
       name: 'Clayton Santos',
       password: (await secret).toString(),
+      role: 'ADMIN',
     },
   });
 
