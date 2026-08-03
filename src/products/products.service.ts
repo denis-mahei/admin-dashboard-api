@@ -20,7 +20,13 @@ export class ProductsService {
     sortBy = 'name',
     order = 'asc',
   }: ProductParams) {
-    return this.prisma.product.findMany({
+    const totalProducts = await this.prisma.product.count({
+      where: {
+        category,
+        name: { contains: name },
+      },
+    });
+    const data = await this.prisma.product.findMany({
       where: {
         category,
         name: { contains: name },
@@ -30,6 +36,10 @@ export class ProductsService {
       take: limit,
       include: { supplier: true },
     });
+    return {
+      data,
+      totalProducts,
+    };
   }
 
   async createProduct(createProductDto: CreateProductDto) {
