@@ -12,7 +12,7 @@ export class DashboardService {
         register_date: 'desc',
       },
     });
-    const incomesExpenses = await this.prisma.customer.findMany();
+    const incomesExpenses = await this.prisma.incomeExpenses.findMany();
     const totalProducts = await this.prisma.product.count();
     const totalCustomers = await this.prisma.customer.count();
     const totalSuppliers = await this.prisma.supplier.count();
