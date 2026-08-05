@@ -6,19 +6,33 @@ export class DashboardService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll() {
-    const recentCustomers = await this.prisma.customer.findMany({
+    const recentData = this.prisma.customer.findMany({
       take: 5,
       orderBy: {
         register_date: 'desc',
       },
     });
-    const incomesExpenses = await this.prisma.incomeExpenses.findMany();
-    const totalProducts = await this.prisma.product.count();
-    const totalCustomers = await this.prisma.customer.count();
-    const totalSuppliers = await this.prisma.supplier.count();
-    return {
-      totalProducts,
+    const incomesData = this.prisma.incomeExpenses.findMany();
+    const productsData = this.prisma.product.count();
+    const customersData = this.prisma.customer.count();
+    const suppliersData = this.prisma.supplier.count();
+
+    const [
       incomesExpenses,
+      totalProducts,
+      totalCustomers,
+      totalSuppliers,
+      recentCustomers,
+    ] = await Promise.all([
+      incomesData,
+      productsData,
+      customersData,
+      suppliersData,
+      recentData,
+    ]);
+    return {
+      incomesExpenses,
+      totalProducts,
       totalCustomers,
       totalSuppliers,
       recentCustomers,
