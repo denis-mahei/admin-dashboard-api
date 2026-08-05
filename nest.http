@@ -99,7 +99,7 @@ Content-Type: application/json
 }
 
 ### get orders with query:
-GET {{host}}/orders?order=desc
+GET {{host}}/orders
 Content-Type: application/json
 
 ### get all customers:

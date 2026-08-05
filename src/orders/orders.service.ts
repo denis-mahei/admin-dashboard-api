@@ -8,20 +8,26 @@ export class OrdersService {
 
   async findAll({
     name,
-    status,
     order = 'asc',
-    sortBy = 'status',
+    sortBy = 'name',
     page = 1,
     limit = 10,
   }: OrderParams) {
-    return this.prisma.order.findMany({
-      where: {
-        name: { contains: name },
-        status,
-      },
+    const where = {
+      name: { contains: name },
+    };
+    const orders = this.prisma.order.findMany({
+      where,
       orderBy: { [sortBy]: order },
       skip: (page - 1) * limit,
       take: limit,
     });
+
+    const ordersCount = this.prisma.order.count({
+      where,
+    });
+
+    const [data, total] = await Promise.all([orders, ordersCount]);
+    return { data, total };
   }
 }
