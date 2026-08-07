@@ -7,6 +7,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/updateProduct.dto';
 import { ProductParams } from './interface/product-params';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ProductsService {
@@ -20,17 +21,15 @@ export class ProductsService {
     sortBy = 'name',
     order = 'asc',
   }: ProductParams) {
+    const where = {
+      category: category || Prisma.skip,
+      name: name ? { contains: name } : Prisma.skip,
+    };
     const totalProducts = this.prisma.product.count({
-      where: {
-        category,
-        name: { contains: name },
-      },
+      where,
     });
     const data = this.prisma.product.findMany({
-      where: {
-        category,
-        name: { contains: name },
-      },
+      where,
       orderBy: { [sortBy]: order },
       skip: (page - 1) * limit,
       take: limit,

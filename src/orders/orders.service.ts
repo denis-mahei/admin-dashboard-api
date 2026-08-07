@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { OrderParams } from './interface/order-params';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class OrdersService {
@@ -14,7 +15,7 @@ export class OrdersService {
     limit = 10,
   }: OrderParams) {
     const where = {
-      name: { contains: name },
+      name: name ? { contains: name } : Prisma.skip,
     };
     const orders = this.prisma.order.findMany({
       where,
