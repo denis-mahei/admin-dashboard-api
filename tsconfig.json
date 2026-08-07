@@ -21,9 +21,6 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "resolveJsonModule": true,
-    "paths": {
-      "@prisma/client": ["./generated/prisma/client"]
-    }
+    "resolveJsonModule": true
   }
 }

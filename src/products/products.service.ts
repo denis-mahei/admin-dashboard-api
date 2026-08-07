@@ -7,7 +7,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/updateProduct.dto';
 import { ProductParams } from './interface/product-params';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '../../generated/prisma/client';
 
 @Injectable()
 export class ProductsService {
