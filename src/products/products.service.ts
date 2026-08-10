@@ -61,7 +61,10 @@ export class ProductsService {
   async updateProduct(id: number, updateProductDto: UpdateProductDto) {
     const product = await this.prisma.product.update({
       where: { id },
-      data: updateProductDto,
+      data: {
+        ...updateProductDto,
+        photo: updateProductDto.photo ?? Prisma.skip,
+      },
     });
 
     if (!product) {
