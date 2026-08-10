@@ -37,7 +37,7 @@ model Supplier {
 
 model Product {
   id         Int        @id @default(autoincrement())
-  photo      String
+  photo      String?
   name       String
   supplier   Supplier   @relation(fields: [supplierId], references: [id])
   stock      Int
@@ -49,7 +49,7 @@ model Product {
 
 model Customer {
   id            Int      @id @default(autoincrement())
-  photo         String
+  photo         String?
   name          String
   email         String
   spent         Float
