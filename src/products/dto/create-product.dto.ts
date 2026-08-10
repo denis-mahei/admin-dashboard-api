@@ -13,8 +13,8 @@ export class CreateProductDto {
   @IsString()
   name: string;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   photo: string;
 
   @IsNotEmpty()

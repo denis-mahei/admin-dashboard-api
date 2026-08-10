@@ -51,7 +51,10 @@ export class ProductsService {
     }
 
     return this.prisma.product.create({
-      data: createProductDto,
+      data: {
+        ...createProductDto,
+        photo: createProductDto.photo ?? Prisma.skip,
+      },
     });
   }
 
