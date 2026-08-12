@@ -6,12 +6,14 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { SuppliersService } from './suppliers.service';
 import { JwtAuthGuard } from '../auth/jwt-auth/jwt-auth.guard';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
+import { SupplierParamsDto } from './dto/supplier-params.dto';
 
 @Controller('suppliers')
 export class SuppliersController {
@@ -19,8 +21,14 @@ export class SuppliersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async findAll() {
-    return this.suppliers.findAll();
+  async findByQuery(@Query() params: SupplierParamsDto) {
+    return await this.suppliers.findAll(params);
+  }
+
+  @Get('lookup')
+  @UseGuards(JwtAuthGuard)
+  async findAllCompanies() {
+    return this.suppliers.findAllLookup();
   }
 
   @Post()

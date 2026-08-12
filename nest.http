@@ -74,7 +74,7 @@ Content-Type: application/json
 }
 
 ### get suppliers:
-GET {{host}}/suppliers
+GET {{host}}/suppliers/lookup
 Content-Type: application/json
 
 ### add new supplier:
