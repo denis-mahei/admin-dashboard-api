@@ -3,10 +3,12 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { JwtAuthGuard } from '../auth/jwt-auth/jwt-auth.guard';
+import { CustomersParamsDto } from './dto/customers-params.dto';
 
 @Controller('customers')
 export class CustomersController {
@@ -14,8 +16,8 @@ export class CustomersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async getCustomers() {
-    return await this.customers.findAll();
+  async getCustomers(@Query() params: CustomersParamsDto) {
+    return await this.customers.findAll(params);
   }
 
   @Get(':id')
